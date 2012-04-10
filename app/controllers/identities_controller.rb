@@ -3,6 +3,7 @@ class IdentitiesController < ApplicationController
 
   def new
     @identity = env['omniauth.identity']
+    @view_name = "New account"
   end
 
   def show

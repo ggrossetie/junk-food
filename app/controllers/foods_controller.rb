@@ -26,6 +26,8 @@ class FoodsController < ApplicationController
   def new
     @food = Food.new
 
+    @view_name = "New food"
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @food }

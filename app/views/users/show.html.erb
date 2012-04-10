@@ -1,5 +1,8 @@
 <p id="notice"><%= notice %></p>
-<h1>User Profile</h1>
+<div class="well">
+<p>
+  <%= @gravatar_img %>
+</p>
 <p>
   <strong>Name:</strong>
   <%= @user.name %>
@@ -12,5 +15,5 @@
   <strong>OmniAuth UID:</strong>
   <%= @user.uid %>
 </p>
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', dashboard_path %>
+</div>
+<%= link_to 'Back', dashboard_path, :class => "btn" %>

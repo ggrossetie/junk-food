@@ -9,7 +9,7 @@
             <h5><a><%= f.name %></a></h5>
           </td>
           <td>
-            <%= link_to "#shareFood_#{f.id}", :class => "btn btn btn-mini", :data => {:toggle => "modal"} do %>
+            <%= link_to "#shareFood_#{f.id}", :class => "btn btn-mini", :data => {:toggle => "modal"} do %>
               <i class="icon-star"></i> Share
             <% end %>
             <%= content_tag :div, :id => "shareFood_#{f.id}", :class => "modal hide fade", :style => "display: none; " do %>

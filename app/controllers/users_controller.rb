@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  include ApplicationHelper
+
   # GET /users
   # GET /users.json
   def index
@@ -14,6 +16,11 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
+
+    identity = Identity.find(@user.uid)
+    @gravatar_img = gravatar(identity.email).html_safe if identity
+
+    @view_name = "User profile"
 
     respond_to do |format|
       format.html # show.html.erb
