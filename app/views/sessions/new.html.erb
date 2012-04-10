@@ -1,6 +1,6 @@
 <div class="hero-unit">
-<h1>Connexion</h1>
-<!--
+  <h1>Connexion</h1>
+  <!--
   <p>Utilisez un des services ci-dessous pour vous connecter :</p>
   <div class="auth_providers">
     <a href="/auth/twitter" class="auth_provider">
@@ -22,11 +22,11 @@
   </div>
 <p><strong>Vous n'utilisez pas ces services ?</strong> 
 -->
-<p><%= link_to "Créer un compte", new_identity_path %> ou connectez-vous ci-dessous :</p>
-  
-<%= form_tag "/auth/identity/callback", :class => 'well form-inline' do %>
-  <%= text_field_tag :auth_key, nil, :class => "input-medium", :placeholder => "Email" %>
-  <%= password_field_tag :password, nil, :class => "input-small", :placeholder => "Password" %>
-  <%= button_tag "Login", :type => "submit", :class => "btn" %>
-<% end %>
+  <p><%= link_to "Créer un compte", new_identity_path %> ou connectez-vous ci-dessous :</p>
+
+  <%= form_tag "/auth/identity/callback", :class => 'well form-inline' do %>
+    <%= text_field_tag :auth_key, nil, :class => "input-medium", :placeholder => "Email" %>
+    <%= password_field_tag :password, nil, :class => "input-small", :placeholder => "Password" %>
+    <%= button_tag "Login", :type => "submit", :class => "btn" %>
+  <% end %>
 </div>

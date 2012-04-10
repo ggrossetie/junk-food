@@ -4,16 +4,16 @@
       <h2><%= pluralize(@food.errors.count, "error") %> prohibited this food from being saved:</h2>
 
       <ul>
-      <% @food.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
+        <% @food.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
       </ul>
     </div>
-    
+
   <% end %>
   <%= f.text_field :name, :placeholder => "Name" %><br/>
   <%= f.text_field :brand, :placeholder => "Brand name" %>
-  
+
   <div class="actions">
     <%= f.submit "Create food", :class => "btn" %>
   </div>

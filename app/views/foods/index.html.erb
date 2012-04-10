@@ -7,15 +7,15 @@
     <th></th>
   </tr>
 
-<% @foods.each do |food| %>
-  <tr>
-    <td><%= link_to 'Show', food %></td>
-    <td><%= link_to 'Edit', edit_food_path(food) %></td>
-    <td><%= link_to 'Destroy', food, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
+  <% @foods.each do |food| %>
+    <tr>
+      <td><%= link_to 'Show', food %></td>
+      <td><%= link_to 'Edit', edit_food_path(food) %></td>
+      <td><%= link_to 'Destroy', food, confirm: 'Are you sure?', method: :delete %></td>
+    </tr>
+  <% end %>
 </table>
 
-<br />
+<br/>
 
 <%= link_to 'New Food', new_food_path %>

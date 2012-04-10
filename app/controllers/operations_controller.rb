@@ -41,15 +41,15 @@ class OperationsController < ApplicationController
   # POST /operations.json
   def create
     @operation = Operation.new(params[:operation])
-    
+
     user = User.find(@operation.user_id)
     @operation.user = user;
-    
+
     food = Food.find(@operation.food_id)
     @operation.food = food;
 
     @operation.date = Time.zone.now.to_datetime
-    
+
     respond_to do |format|
       if @operation.save
         format.html { redirect_to dashboard_url, notice: 'Operation was successfully created.' }

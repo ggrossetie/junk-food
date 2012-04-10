@@ -4,15 +4,16 @@
       <h2><%= pluralize(@operation.errors.count, "error") %> prohibited this operation from being saved:</h2>
 
       <ul>
-      <% @operation.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
+        <% @operation.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
 
   <div class="field">
-    <%= f.label :value %><br />
+    <%= f.label :value %>
+    <br/>
     <%= f.text_field :value %>
   </div>
   <div class="actions">
