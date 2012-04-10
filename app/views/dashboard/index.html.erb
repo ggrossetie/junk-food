@@ -1,0 +1,80 @@
+<div class="row">
+<div class="span3">
+<h4>Food available</h4>
+<br/>
+<table class="table">
+<% @foods.each do |f| %>
+<tr>
+<td>
+<h5><a><%= f.name %></a></h5> 
+</td>
+<td>
+<%= link_to "#shareFood_#{f.id}", :class => "btn btn btn-mini", :data => {:toggle=>"modal"} do %>
+<i class="icon-star"></i> Share
+<% end %>
+<%= content_tag :div, :id => "shareFood_#{f.id}", :class => "modal hide fade", :style => "display: none; " do %>
+            <div class="modal-header">
+              <a class="close" data-dismiss="modal">×</a>
+              <h3>Share <%= f.name %> !</h3>
+            </div>
+            <div class="modal-body">
+            <%= form_for(@operation) do |o| %>
+            How generous are you ? <%= o.text_field :value, :class => "input-small" %>
+            <%= o.hidden_field :user_id, {:value => current_user.id} %>
+            <%= o.hidden_field :food_id, {:value => f.id} %>
+            </div>
+            <div class="modal-footer">
+              <a href="#" class="btn" data-dismiss="modal">Close</a>
+              <%= o.submit "Save", :type => "submit", :class => "btn btn-primary" %>
+            </div>
+           <% end %>
+<% end %>
+ <%= form_for(@operation, :html => { :style => "display : inline-block; margin : 0; "} ) do |o| %>
+  <%= o.hidden_field :value, {:value => -1} %>
+  <%= o.hidden_field :user_id, {:value => current_user.id} %>
+  <%= o.hidden_field :food_id, {:value => f.id} %>
+  <%= o.submit "Eat !", :type => "submit", :class => "btn btn-danger btn-mini" do %>
+  <i class="icon-chevron-right icon-white"></i>
+  <% end %>
+<% end %>
+</td>
+</tr>
+<% end %>
+</table>
+<br/>
+<%= link_to new_food_path, :class => "btn btn-primary btn-mini" do %>
+<i class="icon-plus icon-white"></i> Add new food
+<% end %>
+</div>
+<div class="span6">
+  <h3>Lastest operations</h3>
+<table>
+<% @operations.each do |o| %>
+<tr>
+<td>
+<%= o.value %>
+</td>
+<td>
+<%= o.user.name if o.user %>
+</td>
+<td>
+<%= o.food.name if o.food %>
+</td>
+<td>
+<%= o.date.strftime("%d/%m/%Y - %I:%M%p") if o.date %>
+</td>
+<% end %>
+</table>
+
+</div>
+<div class="span2">
+    <div class="span2">
+      <h4>Top eater</h4>
+      <a>Week</a> <a>month</a> <a>all time</a>
+    </div>
+    <div class="span2">
+      <h4>Top contributor</h4>
+      <a>Week</a> <a>month</a> <a>all time</a>
+    </div>
+</div>
+</div>
