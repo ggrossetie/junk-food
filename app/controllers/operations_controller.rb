@@ -43,10 +43,15 @@ class OperationsController < ApplicationController
     @operation = Operation.new(params[:operation])
 
     user = User.find(@operation.user_id)
-    @operation.user = user;
+    @operation.user = user
 
     food = Food.find(@operation.food_id)
-    @operation.food = food;
+    if food.remaining.nil?
+      food.remaining = 0
+    end
+    food.remaining = food.remaining + @operation.value
+    food.save
+    @operation.food = food
 
     @operation.date = Time.zone.now.to_datetime
 

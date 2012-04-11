@@ -2,42 +2,57 @@
   <div class="span3">
     <h4>Food available</h4>
     <br/>
-    <table class="table">
+    <table>
       <% @foods.each do |f| %>
         <tr>
           <td>
-            <h5><a><%= f.name %></a></h5>
-          </td>
-          <td>
-            <%= link_to "#shareFood_#{f.id}", :class => "btn btn-mini", :data => {:toggle => "modal"} do %>
-              <i class="icon-star"></i> Share
-            <% end %>
-            <%= content_tag :div, :id => "shareFood_#{f.id}", :class => "modal hide fade", :style => "display: none; " do %>
-              <div class="modal-header">
-                <a class="close" data-dismiss="modal">×</a>
-
-                <h3>Share <%= f.name %> !</h3>
-              </div>
-              <div class="modal-body">
-                <%= form_for(@operation) do |o| %>
-                  How generous are you ? <%= o.text_field :value, :class => "input-small" %>
-                  <%= o.hidden_field :user_id, {:value => current_user.id} %>
-                  <%= o.hidden_field :food_id, {:value => f.id} %>
-                  </div>
-                  <div class="modal-footer">
-                    <a href="#" class="btn" data-dismiss="modal">Close</a>
-                    <%= o.submit "Save", :type => "submit", :class => "btn btn-primary" %>
-                  </div>
-                <% end %>
-            <% end %>
-            <%= form_for(@operation, :html => {:style => "display : inline-block; margin : 0; "}) do |o| %>
-              <%= o.hidden_field :value, {:value => -1} %>
-              <%= o.hidden_field :user_id, {:value => current_user.id} %>
-              <%= o.hidden_field :food_id, {:value => f.id} %>
-              <%= o.submit "Eat !", :type => "submit", :class => "btn btn-danger btn-mini" do %>
-                <i class="icon-chevron-right icon-white"></i>
+            <% if f.remaining %>
+              <% if f.remaining > 10 %>
+                <% class_span = "label-info" %>
+              <% elsif f.remaining > 5 %>
+                <% class_span = "label-success" %>
+              <% elsif f.remaining > 0 %>
+                <% class_span = "label-warning" %>
+              <% else %>
+                <% class_span = "label-important" %>
+              <% end %>
+              <%= content_tag :span, :class => "label " + class_span , :style => "vertical-align: text-top;" do %>
+                <%= f.remaining %>
               <% end %>
             <% end %>
+          </td>
+          <td>
+            <%= f.name %>
+          </td>
+          <td>
+          <%= link_to "#shareFood_#{f.id}", :class => "btn btn-mini", :data => {:toggle => "modal"} do %>
+            <i class="icon-star"></i> Share
+          <% end %>
+          <%= content_tag :div, :id => "shareFood_#{f.id}", :class => "modal hide fade", :style => "display: none; " do %>
+            <div class="modal-header">
+              <a class="close" data-dismiss="modal">×</a>
+              <h3>Share <%= f.name %> !</h3>
+            </div>
+            <div class="modal-body">
+              <%= form_for(@operation) do |o| %>
+                How generous are you ? <%= o.text_field :value, :class => "input-small" %>
+                <%= o.hidden_field :user_id, {:value => current_user.id} %>
+                <%= o.hidden_field :food_id, {:value => f.id} %>
+                </div>
+                <div class="modal-footer">
+                  <a href="#" class="btn" data-dismiss="modal">Close</a>
+                  <%= o.submit "Save", :type => "submit", :class => "btn btn-primary" %>
+                </div>
+              <% end %>
+          <% end %>
+          <%= form_for(@operation, :html => {:style => "display : inline-block; margin : 0; "}) do |o| %>
+            <%= o.hidden_field :value, {:value => -1} %>
+            <%= o.hidden_field :user_id, {:value => current_user.id} %>
+            <%= o.hidden_field :food_id, {:value => f.id} %>
+            <%= o.submit "Eat !", :type => "submit", :class => "btn btn-danger btn-mini" do %>
+              <i class="icon-chevron-right icon-white"></i>
+            <% end %>
+          <% end %>
           </td>
         </tr>
       <% end %>
@@ -48,21 +63,25 @@
     <% end %>
   </div>
   <div class="span6">
-    <h3>Lastest operations</h3>
-    <table>
+    <h3>Latest operations</h3>
+    <table class="table table-condensed">
       <% @operations.each do |o| %>
         <tr>
           <td>
-            <%= o.value %>
-          </td>
-          <td>
-            <%= o.user.name if o.user %>
+            <% if o.value > 0 %>
+              <span class="label label-inverse" style="vertical-align: text-top;" > <%= o.value %></span>
+            <% else %>
+              <span class="label label-default" style="vertical-align: text-top;"> <%= o.value %></span>
+            <% end %>
           </td>
           <td>
             <%= o.food.name if o.food %>
           </td>
           <td>
-            <%= o.date.strftime("%d/%m/%Y - %I:%M%p") if o.date %>
+            <strong><%= o.user.name if o.user %></strong>
+          </td>
+          <td>
+            <%= time_ago_in_words(o.date) + " ago" if o.date %>
           </td>
       <% end %>
     </table>

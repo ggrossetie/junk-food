@@ -43,10 +43,11 @@ class FoodsController < ApplicationController
   # POST /foods.json
   def create
     @food = Food.new(params[:food])
+    @food.remaining = 0
 
     respond_to do |format|
       if @food.save
-        format.html { redirect_to @food, notice: 'Food was successfully created.' }
+        format.html { redirect_to dashboard_url, notice: 'Food was successfully created.' }
         format.json { render json: @food, status: :created, location: @food }
       else
         format.html { render action: "new" }

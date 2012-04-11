@@ -2,8 +2,8 @@ class Food
   include MongoMapper::Document
 
   key :name, String
-  key :brand, String
   key :creator_uid, String
+  key :remaining, Integer
 
   many :operations
 
