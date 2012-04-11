@@ -6,6 +6,6 @@ class DashboardController < ApplicationController
     @foods = Food.all
     @view_name = "Dashboard"
     @operation = Operation.new
-    @operations = Operation.all(:order => :date.desc)
+    @operations = Operation.limit(15).all(:order => :date.desc)
   end
 end
