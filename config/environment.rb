@@ -3,3 +3,5 @@ require File.expand_path('../application', __FILE__)
 
 # Initialize the rails application
 Auth::Application.initialize!
+
+config.gem "mongo_mapper"
