@@ -1,5 +1,40 @@
 <p id="notice"><%= notice %></p>
 
-
-<%= link_to 'Edit', edit_food_path(@food) %> |
-<%= link_to 'Back', dashboard_path %>
+<div class="well">
+  <h4>Current :
+    <% if @food.remaining %>
+      <% if @food.remaining > 10 %>
+        <% class_span = "label-info" %>
+      <% elsif @food.remaining > 5 %>
+        <% class_span = "label-success" %>
+      <% elsif @food.remaining > 0 %>
+        <% class_span = "label-warning" %>
+      <% else %>
+        <% class_span = "label-important" %>
+      <% end %>
+      <%= content_tag :span, :class => "label " + class_span, :style => "vertical-align: text-top;" do %>
+        <%= @food.remaining %>
+      <% end %>
+    <% end %>
+  </h4>
+  <br/>
+  <table class="table table-condensed">
+    <% @operations.each do |o| %>
+      <tr>
+        <td>
+          <% if o.value > 0 %>
+            <span class="label label-inverse" style="vertical-align: text-top;"> <%= o.value %></span>
+          <% else %>
+            <span class="label label-default" style="vertical-align: text-top;"> <%= o.value %></span>
+          <% end %>
+        </td>
+        <td>
+          <strong><%= o.user.name if o.user %></strong>
+        </td>
+        <td>
+          <%= time_ago_in_words(o.date) + " ago" if o.date %>
+        </td>
+    <% end %>
+  </table>
+</div>
+<%= link_to 'Back', dashboard_path, :class => "btn" %>

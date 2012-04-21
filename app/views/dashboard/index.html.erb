@@ -16,13 +16,15 @@
               <% else %>
                 <% class_span = "label-important" %>
               <% end %>
-              <%= content_tag :span, :class => "label " + class_span , :style => "vertical-align: text-top;" do %>
+              <%= content_tag :span, :class => "label " + class_span, :style => "vertical-align: text-top;" do %>
                 <%= f.remaining %>
               <% end %>
             <% end %>
           </td>
           <td>
-            <%= f.name %>
+            <%= link_to food_path(f.id) do %>
+              <%= f.name %>
+            <% end %>
           </td>
           <td>
             <%= link_to "#shareFood_#{f.id}", :class => "btn btn-mini", :data => {:toggle => "modal"} do %>
@@ -69,7 +71,7 @@
         <tr>
           <td>
             <% if o.value > 0 %>
-              <span class="label label-inverse" style="vertical-align: text-top;" > <%= o.value %></span>
+              <span class="label label-inverse" style="vertical-align: text-top;"> <%= o.value %></span>
             <% else %>
               <span class="label label-default" style="vertical-align: text-top;"> <%= o.value %></span>
             <% end %>

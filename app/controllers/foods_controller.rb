@@ -14,7 +14,8 @@ class FoodsController < ApplicationController
   # GET /foods/1.json
   def show
     @food = Food.find(params[:id])
-
+    @view_name = @food.name
+    @operations = Operation.limit(5).all(:food_id => params[:id])
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @food }
