@@ -4,11 +4,11 @@ defaults: &defaults
 
 development:
   <<: *defaults
-  database: junk_food_development
+  database: junk-food-development
 
 test:
   <<: *defaults
-  database: junk_food_test
+  database: junk-food-test
 
 # set these environment variables on your prod server
 production:
