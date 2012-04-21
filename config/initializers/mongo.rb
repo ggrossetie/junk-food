@@ -20,4 +20,3 @@ if defined?(PhusionPassenger)
      MongoMapper.connection.connect if forked
    end
 end
- 
