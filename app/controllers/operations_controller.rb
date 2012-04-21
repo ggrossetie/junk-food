@@ -49,25 +49,35 @@ class OperationsController < ApplicationController
     if food.remaining.nil?
       food.remaining = 0
     end
+
     food.remaining = food.remaining + @operation.value
-    food.save
-    @operation.food = food
+    if food.remaining < 0
+      respond_to do |format|
+        format.html { redirect_to dashboard_url, :flash => {:error => 'You can\'t eat anymore!'} }
+        format.json { render text: 'You can\'t anymore !', status: :unprocessable_entity }
+      end
+    else
+      food.save
+      @operation.food = food
 
-    @operation.date = Time.zone.now.to_datetime
+      @operation.date = Time.zone.now.to_datetime
 
-    respond_to do |format|
-      if @operation.save
-        format.html { redirect_to dashboard_url, notice: 'Operation was successfully created.' }
-        format.json { render json: @operation, status: :created, location: @operation }
-      else
-        format.html { redirect_to dashboard_url, notice: 'Failed to create operation !' }
-        format.json { render json: @operation.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @operation.save
+          format.html { redirect_to dashboard_url, notice: 'Yummy!' }
+          format.json { render json: @operation, status: :created, location: @operation }
+        else
+          format.html { redirect_to dashboard_url, notice: 'Failed to create operation !' }
+          format.json { render json: @operation.errors, status: :unprocessable_entity }
+        end
       end
     end
+
   end
 
-  # PUT /operations/1
-  # PUT /operations/1.json
+
+# PUT /operations/1
+# PUT /operations/1.json
   def update
     @operation = Operation.find(params[:id])
 
@@ -82,8 +92,8 @@ class OperationsController < ApplicationController
     end
   end
 
-  # DELETE /operations/1
-  # DELETE /operations/1.json
+# DELETE /operations/1
+# DELETE /operations/1.json
   def destroy
     @operation = Operation.find(params[:id])
     @operation.destroy
@@ -93,4 +103,5 @@ class OperationsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
 end
