@@ -92,47 +92,51 @@
   </div>
   <div class="span3">
     <div>
-      <h4>Top eater</h4>
-      <table style="margin-bottom: 5px">
-        <tr>
-          <td>
-            <%= @top_eater_user.gravatar_img %>
-          </td>
-          <td>
-            <%= @top_eater_user.name %>
-            <br/>
-            <span class="label label-important"><%= @top_eater_user.value %></span>
-          </td>
-        </tr>
-      </table>
-      <div class="btn-group" data-toggle="buttons-radio">
-        <button class="btn week-btn" style="padding: 2px 4px 2px 4px">Week</button>
-        <button class="btn" style="padding: 2px 4px 2px 4px">Month</button>
-        <button class="btn" style="padding: 2px 4px 2px 4px">All time</button>
-      </div>
+      <% if @top_eater_user %>
+        <h4>Top eater</h4>
+        <table style="margin-bottom: 5px">
+          <tr>
+            <td>
+              <%= @top_eater_user.gravatar_img %>
+            </td>
+            <td>
+              <%= @top_eater_user.name %>
+              <br/>
+              <span class="label label-important"><%= @top_eater_user.value %></span>
+            </td>
+          </tr>
+        </table>
+        <div class="btn-group" data-toggle="buttons-radio">
+          <button class="btn week-btn" style="padding: 2px 4px 2px 4px">Week</button>
+          <button class="btn" style="padding: 2px 4px 2px 4px">Month</button>
+          <button class="btn" style="padding: 2px 4px 2px 4px">All time</button>
+        </div>
+      <% end %>
     </div>
     <br/>
     <br/>
 
     <div>
-      <h4>Top contributor</h4>
-      <table style="margin-bottom: 5px">
-        <tr>
-          <td>
-            <%= @top_contributor_user.gravatar_img %>
-          </td>
-          <td>
-            <%= @top_contributor_user.name %>
-            <br/>
-            <span class="label label-success"><%= @top_contributor_user.value %></span>
-          </td>
-        </tr>
-      </table>
-      <div class="btn-group" data-toggle="buttons-radio">
-        <button class="btn week-btn" style="padding: 2px 4px 2px 4px">Week</button>
-        <button class="btn week-month-contributor" style="padding: 2px 4px 2px 4px">Month</button>
-        <button class="btn" style="padding: 2px 4px 2px 4px">All time</button>
-      </div>
+      <% if @top_contributor_user %>
+        <h4>Top contributor</h4>
+        <table style="margin-bottom: 5px">
+          <tr>
+            <td>
+              <%= @top_contributor_user.gravatar_img %>
+            </td>
+            <td>
+              <%= @top_contributor_user.name %>
+              <br/>
+              <span class="label label-success"><%= @top_contributor_user.value %></span>
+            </td>
+          </tr>
+        </table>
+        <div class="btn-group" data-toggle="buttons-radio">
+          <button class="btn week-btn" style="padding: 2px 4px 2px 4px">Week</button>
+          <button class="btn week-month-contributor" style="padding: 2px 4px 2px 4px">Month</button>
+          <button class="btn" style="padding: 2px 4px 2px 4px">All time</button>
+        </div>
+      <% end %>
     </div>
     <script>
       $('.week-btn').button('toggle')
