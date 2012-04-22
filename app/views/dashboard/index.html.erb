@@ -33,6 +33,7 @@
             <%= content_tag :div, :id => "shareFood_#{f.id}", :class => "modal hide fade", :style => "display: none; " do %>
               <div class="modal-header">
                 <a class="close" data-dismiss="modal">×</a>
+
                 <h3>Share <%= f.name %> !</h3>
               </div>
               <div class="modal-body">
@@ -89,14 +90,52 @@
     </table>
 
   </div>
-  <div class="span2">
-    <div class="span2">
+  <div class="span3">
+    <div>
       <h4>Top eater</h4>
-      <a>Week</a> <a>month</a> <a>all time</a>
+      <table style="margin-bottom: 5px">
+        <tr>
+          <td>
+            <%= @top_eater_user.gravatar_img %>
+          </td>
+          <td>
+            <%= @top_eater_user.name %>
+            <br/>
+            <span class="label label-important"><%= @top_eater_user.value %></span>
+          </td>
+        </tr>
+      </table>
+      <div class="btn-group" data-toggle="buttons-radio">
+        <button class="btn week-btn" style="padding: 2px 4px 2px 4px">Week</button>
+        <button class="btn" style="padding: 2px 4px 2px 4px">Month</button>
+        <button class="btn" style="padding: 2px 4px 2px 4px">All time</button>
+      </div>
     </div>
-    <div class="span2">
+    <br/>
+    <br/>
+
+    <div>
       <h4>Top contributor</h4>
-      <a>Week</a> <a>month</a> <a>all time</a>
+      <table style="margin-bottom: 5px">
+        <tr>
+          <td>
+            <%= @top_contributor_user.gravatar_img %>
+          </td>
+          <td>
+            <%= @top_contributor_user.name %>
+            <br/>
+            <span class="label label-success"><%= @top_contributor_user.value %></span>
+          </td>
+        </tr>
+      </table>
+      <div class="btn-group" data-toggle="buttons-radio">
+        <button class="btn week-btn" style="padding: 2px 4px 2px 4px">Week</button>
+        <button class="btn week-month-contributor" style="padding: 2px 4px 2px 4px">Month</button>
+        <button class="btn" style="padding: 2px 4px 2px 4px">All time</button>
+      </div>
     </div>
+    <script>
+      $('.week-btn').button('toggle')
+    </script>
   </div>
 </div>
